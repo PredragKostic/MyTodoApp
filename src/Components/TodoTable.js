@@ -29,6 +29,7 @@ const TodoTable = ({setTodoId}) => {
               <TableCell>Title</TableCell>
               <TableCell>Task</TableCell>
               <TableCell>Due Date</TableCell>
+              <TableCell>Department</TableCell>
               <TableCell>Update</TableCell>
               <TableCell>Delete</TableCell>
             </TableRow>
@@ -40,6 +41,7 @@ const TodoTable = ({setTodoId}) => {
                   <TableCell>{elem.data.title}</TableCell>
                   <TableCell>{elem.data.task}</TableCell>
                   <TableCell>{elem.data.dueDate}</TableCell>
+                  <TableCell>{elem.data.department}</TableCell>
                   <TableCell>
                     <Link to="/">
                     <BorderColorIcon

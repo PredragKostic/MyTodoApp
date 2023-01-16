@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addTodo, updateTodo } from '../actions';
+import { Select, MenuItem } from '@material-ui/core';
 import './TodoForm.css';
 
 const TodoForm = ({ todoId, setTodoId }) => {
@@ -9,15 +10,17 @@ const TodoForm = ({ todoId, setTodoId }) => {
     title: '',
     task: '',
     dueDate: '',
+    department: ''
   });
 
+ 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputData.title && inputData.task && inputData.dueDate !== '') {
+    if (inputData.title && inputData.task && inputData.dueDate && inputData.department !== '') {
       if (todoId === null) {
         dispatch(addTodo(inputData));
       } else {
@@ -41,6 +44,8 @@ const TodoForm = ({ todoId, setTodoId }) => {
       [name]: value,
     });
   };
+
+  
   return (
     <div>
       <form className="todo-form">
@@ -61,6 +66,21 @@ const TodoForm = ({ todoId, setTodoId }) => {
           value={inputData.task}
           onChange={handleChange}
         />
+        <Select
+        
+        name="department"
+          value={inputData.department}
+          displayEmpty
+          placeholder="Department"
+          onChange={handleChange}
+        >
+          <MenuItem value="" disabled>
+            Choose Department
+          </MenuItem>
+          <MenuItem value="Work">Work</MenuItem>
+          <MenuItem value="Home">Home</MenuItem>
+          <MenuItem value="Other">Other</MenuItem>
+        </Select>
         <input
           type="date"
           placeholder="Due Date"
