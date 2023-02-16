@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { addTodo, updateTodo } from '../actions';
+import { useNavigate, useParams } from 'react-router-dom';
+import { addTodo } from '../actions';
 import { Select, MenuItem } from '@material-ui/core';
+import TextField from '@mui/material/TextField';
 import './TodoForm.css';
 
 const TodoForm = ({ todoId, setTodoId }) => {
@@ -21,13 +22,10 @@ const TodoForm = ({ todoId, setTodoId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputData.title && inputData.task && inputData.dueDate && inputData.department !== '') {
-      if (todoId === null) {
-        dispatch(addTodo(inputData));
-      } else {
-        dispatch(updateTodo(todoId, inputData));
-      }
+      inputData.id = new Date().getTime().toString();
+      dispatch(addTodo(inputData));
       clear();
-      navigate('/table');
+      navigate('/');
     }
   };
 
@@ -49,8 +47,8 @@ const TodoForm = ({ todoId, setTodoId }) => {
   return (
     <div>
       <form className="todo-form">
-        <h3 className="heading">{todoId ? 'Update Form' : 'Todo Form'}</h3>
-        <input
+        <h3 className="heading">Create New Task</h3>
+        <TextField
           type="text"
           placeholder="Title"
           className="todo-input"
@@ -58,7 +56,10 @@ const TodoForm = ({ todoId, setTodoId }) => {
           value={inputData.title}
           onChange={handleChange}
         />
-        <textarea
+        <TextField
+          multiline
+          rows={2}
+          maxRows={4}
           type="message"
           placeholder="Task"
           className="todo-input"
@@ -90,7 +91,7 @@ const TodoForm = ({ todoId, setTodoId }) => {
           onChange={handleChange}
         />
         <button className="todo-button" onClick={handleSubmit}>
-          {todoId ? 'Update Todo' : 'Add Todo'}
+          {todoId ? 'Update Task' : 'Add Task'}
         </button>
       </form>
     </div>

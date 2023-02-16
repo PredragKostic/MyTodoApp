@@ -2,7 +2,6 @@ export const addTodo = (data) => {
   return {
     type: 'ADD_TODO',
     payload: {
-      id: new Date().getTime().toString(),
       data: data,
     },
   };
@@ -13,6 +12,13 @@ export const updateTodo = (id, data) => {
     type: 'UPDATE_TODO',
     id: id,
     data: data,
+  };
+};
+
+export const setTodoItem = (id) => {
+  return {
+    type: 'SET_TODO_ITEM',
+    id: id,
   };
 };
 

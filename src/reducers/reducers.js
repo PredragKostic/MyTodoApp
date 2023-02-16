@@ -1,5 +1,6 @@
 const initialInput = {
   todoList: [],
+  todoItem: null,
 };
 
 const allReducers = (state = initialInput, action) => {
@@ -20,13 +21,17 @@ const allReducers = (state = initialInput, action) => {
 
     case 'UPDATE_TODO':
       state.todoList.map((elem) => {
-        return elem.id === action.id
-          ? (elem.data = action.data)
-          : (elem); //elem = elem
+        return elem.id === action.id ? (elem.data = action.data) : elem; //elem = elem
       });
       return {
         ...state,
         todoList: [...state.todoList],
+      };
+
+    case 'SET_TODO_ITEM':
+      return {
+        ...state,
+        todoItem: state.todoList.find((elem) => elem.data.id === action.id),
       };
 
     case 'DELETE_TODO':

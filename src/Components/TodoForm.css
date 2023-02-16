@@ -42,10 +42,11 @@ body {
   box-shadow:rgba(0, 0, 0, 0.1);
 }
 
-textarea[type="message"] {
-    font-size: 1.3rem;
+.textarea {
+    font-size: 1rem;
     resize: none;
     height: 9rem;
+    width: 100%;
 }
 
 textarea[type="message"]::placeholder {

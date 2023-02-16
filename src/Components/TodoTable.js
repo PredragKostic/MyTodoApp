@@ -37,13 +37,13 @@ const TodoTable = ({setTodoId}) => {
           <TableBody>
             {todoList.map((elem) => {
               return (
-                <TableRow key={elem.id}>
+                <TableRow key={elem.data.id}>
                   <TableCell>{elem.data.title}</TableCell>
                   <TableCell>{elem.data.task}</TableCell>
                   <TableCell>{elem.data.dueDate}</TableCell>
                   <TableCell>{elem.data.department}</TableCell>
                   <TableCell>
-                    <Link to="/">
+                    <Link to={`/tasks/edit/${elem.data.id}`}>
                     <BorderColorIcon
                       onClick={() => setTodoId(elem.id)}
                     />
@@ -51,7 +51,11 @@ const TodoTable = ({setTodoId}) => {
                   </TableCell>
                   <TableCell>
                     <DeleteOutlineIcon
-                      onClick={() => dispatch(deleteTodo(elem.id))}
+                      onClick={function () {
+                        if(window.confirm("Are you sure")) {
+                          dispatch(deleteTodo(elem.id))
+                        }
+                      }}
                     />
                   </TableCell>
                 </TableRow>
@@ -61,7 +65,7 @@ const TodoTable = ({setTodoId}) => {
         </Table>
       </TableContainer>
 
-      <Link to="/">
+      <Link to="/tasks/create">
         <Box
           display="flex"
           justifyContent="center"
